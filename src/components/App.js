@@ -5,58 +5,68 @@ import TaskList from "./TaskList";
 
 import { CATEGORIES, TASKS } from "../data";
 
-
-
 function App() {
-  const [tasks,setTasks] = useState(TASKS)
-  const [categories,setCategories] = useState(CATEGORIES)
-  const [selectedCategory,setselectedCategory]= useState('All')
-  console.log(categories)
-  console.log(tasks.category)
-  console.log(selectedCategory)
-  
+  const [tasks, setTasks] = useState(TASKS);
+  const [categories, setCategories] = useState(CATEGORIES);
+  const [selectedCategory, setselectedCategory] = useState("All");
+
+  const filterTaskbyCategories = tasks.filter((task) => {
+    if (selectedCategory === "All") {
+      return true;
+    } else {
+      return task.category === selectedCategory;
+    }
+  });
+
+  // const filterCategory = selectedCategory.filter((item) => {
+  //   if (item === "ALL") {
+  //     return true;
+  //   } else {
+  //     return item === selectedCategory;
+  //   }
+  // });
+  //console.log(filterCategory)
+  //console.log(filterTaskbyCategories);
+
   const onDeleteTask = (taskToBeDeleted) => {
-  setTasks(tasks.filter(task => taskToBeDeleted !== task))
+    setTasks(tasks.filter((task) => taskToBeDeleted !== task));
+  };
+
+  function onTaskFormSubmit(newTask) {
+    const newArray = [...tasks, newTask];
   }
-
-
-  // function for choosing a category column and rerendering only tasks that match the selectedCategory
 
   const handleCategoryClick = (e) => {
     setselectedCategory(e.target.textContent)
-  
+    console.log(selectedCategory)
+    setTasks(filterTaskbyCategories)
+    console.log(tasks);
+  };
 
-/* 
-when i click on a category- display only the
- filter(items.category === selectedCategory)
+  // console.log(filterTaskbyCategories);
+  // console.log(tasks);
+  // console.log(selectedCategory}
 
+ // const handleTask = () => setTasks(filterTaskbyCategories)
 
+  // const onCategoryClick = () => {
+    // handleCategoryClick();
+    // ;
+// 
+    // console.log(filterTaskbyCategories)
+  // };
 
-*/
-   
-
-
-  }
-
-  function onTaskFormSubmit(newTask){ 
-    e.preventDefault()
-    const newArray = [...tasks,newTask]}
-
-
-
-
-  console.log(tasks)
-
-
-
-
-
-
-return (
+  return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter  tasks={tasks}  handleCategoryClick={handleCategoryClick} categories={categories} />
-      <NewTaskForm onTaskFormSubmit={onTaskFormSubmit}/>
+      <CategoryFilter
+        tasks={tasks}
+        selectedCategory={selectedCategory}
+        setTasks={setTasks}
+        categories={categories}
+        handleCategoryClick={handleCategoryClick}
+      />
+      <NewTaskForm onTaskFormSubmit={onTaskFormSubmit} />
       <TaskList onDeleteTask={onDeleteTask} tasks={tasks} />
     </div>
   );

@@ -7,14 +7,14 @@ function NewTaskForm({onTaskFormSubmit}) {
   
   
   const newTask = {
-    id: uuid()
-    task: taskToDo
-    category: taskCategories
+    id: uuid(),
+    text: taskToDo,
+    category: taskCategories,
   }
 
 
-  function handleSubmit(e)
-  e.preventDefault()
+  function handleSubmit(e){
+  e.preventDefault()}
 
 
 
