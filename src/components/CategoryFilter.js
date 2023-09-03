@@ -3,10 +3,8 @@ import React, { useState } from "react";
 
 function CategoryFilter({
   categories,
-  tasks,
-  setTasks,
   selectedCategory,
-  handleCategoryClick
+  onCategoryClick
 }) {
   //console.log(tasks)
 
@@ -20,7 +18,7 @@ function CategoryFilter({
           type="button"
           key={category}
           className={`${selectedCategory === category ? `selected` : ``}`}
-          onClick={handleCategoryClick}
+          onClick={onCategoryClick}
         >
           {category}
         </button>

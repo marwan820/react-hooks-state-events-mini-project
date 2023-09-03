@@ -4,26 +4,15 @@ import { v4 as uuid  } from "uuid"
 function NewTaskForm({onTaskFormSubmit}) {
   const [taskToDo,setTasktoDO] =  useState("")
   const [taskCategories, setTaskCategory] = useState("")
-  
-  
-  const newTask = {
-    id: uuid(),
-    text: taskToDo,
-    category: taskCategories,
-  }
-
-
-  function handleSubmit(e){
-  e.preventDefault()}
 
 
 
 
   return (
-    <form className="new-task-form" onSubmit={handleSubmit}>
+    <form className="new-task-form" onSubmit={handleSubmit} >
       <label>
         Details
-        <input type="text" name="text" />
+        <input value={newTask.text}  type="text" name="text" onChange={(event) => console.log(event.target.value)} />
       </label>
       <label>
         Category
@@ -31,7 +20,7 @@ function NewTaskForm({onTaskFormSubmit}) {
           {/* render <option> elements for each category here */}
         </select>
       </label>
-      <input type="submit" value="Add task" />
+      <input onChange={onChangeHandler} name="task-category" type="submit" value="Add task" />
     </form>
   );
 }
