@@ -10,10 +10,7 @@ function App() {
   const [categories, setCategories] = useState(CATEGORIES);
   const [selectedCategory, setselectedCategory] = useState("All");
 
-  
   // console.log("taskList:", taskList)
-
-  
 
   const filterTaskbyCategories = tasks.filter((task) => {
     if (selectedCategory === "All") {
@@ -24,8 +21,7 @@ function App() {
       return task.category === selectedCategory;
     }
   });
-;
-const filterList = filterTaskbyCategories
+  const filterList = filterTaskbyCategories;
 
   // function updateTasks(object) {
   // setTasks(object);
@@ -48,9 +44,6 @@ const filterList = filterTaskbyCategories
     const newArray = [...tasks, newTask];
   }
 
-
-  
-
   //const handleCategoryClick = (e) => {setselectedCategory(e.target.textContent)}
 
   // const filterList =  {
@@ -59,32 +52,29 @@ const filterList = filterTaskbyCategories
   // };
   //  console.log(filterList)
 
-//const filterListBycatefory = filterTaskbyCategories.map(task => task)
+  //const filterListBycatefory = filterTaskbyCategories.map(task => task)
 
- //const handleTask = (obj) => {
- // const filterList = { text : obj.text, category : obj.category }
- // setTasks(filterList)}
+  //const handleTask = (obj) => {
+  // const filterList = { text : obj.text, category : obj.category }
+  // setTasks(filterList)}
 
   const onCategoryClick = (e) => {
-    
     //const filterlist = filterTaskbyCategories.map(task => {task.category = task.category, task.text = task.text})
-    setselectedCategory((selectedCategory) => selectedCategory = e.target.textContent)
-  
-  
-
-  
-   // console.log(filterList)
-    //const taskVariable = filterTaskbyCategories
-    // console.log("selectedState:",selectedCategory);
-    //console.log(filterTaskbyCategories)
-    //console.log( "category:",categorySelect);
+    setselectedCategory(
+      (selectedCategory) => (selectedCategory = e.target.textContent)
+    );
   };
-  console.log(selectedCategory)
-  console.log("filter after:",filterTaskbyCategories);
-  console.log("TASKS:",tasks)
 
+  // console.log(filterList)
+  //const taskVariable = filterTaskbyCategories
+  // console.log("selectedState:",selectedCategory);
+  //console.log(filterTaskbyCategories)
+  //console.log( "category:",categorySelect);
+  //console.log(selectedCategory)
+  //console.log("filter after:",filterTaskbyCategories);
+  //console.log("TASKS:",tasks)
+  console.log("filterList:", filterList);
 
-   
   // console.log(selectedCategory)
   //console.log("filter:" ,filterTaskbyCategories)
   // const handleTaskbyCategory = () => {
@@ -99,8 +89,8 @@ const filterList = filterTaskbyCategories
         categories={categories}
         onCategoryClick={onCategoryClick}
       />
-      <NewTaskForm onTaskFormSubmit={onTaskFormSubmit} />
-      <TaskList onDeleteTask={onDeleteTask} filterList={filterList} />
+      <NewTaskForm onTaskFormSubmit={onTaskFormSubmit} filterList={filterList}/>
+      <TaskList onDeleteTask={onDeleteTask} tasks={filterList} />
     </div>
   );
 }
