@@ -1,16 +1,41 @@
 import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
 
-function NewTaskForm({ onTaskFormSubmit, filterList }) {
-  const [taskToDo, setTasktoDO] = useState("");
-  const [taskCategories, setTaskCategory] = useState("");
+function NewTaskForm({ categories, tasks, onTaskFormSubmit }) {
+  const [taskToDo, setTasktoDO] = useState("something");
+  const [taskCategories, setTaskCategory] = useState("ALL");
+
+  const newTask = {
+    text: taskToDo,
+    category: taskCategories,
+  };
 
   const handleSubmit = (e) => {
-    console.log(e.target);
+    e.preventDefault();
+    onTaskFormSubmit(newTask);
+    setTasktoDO("");
+    setTaskCategory("");
   };
-  const onChangeHandler = (e) =>
-    setTasktoDO((taskToDo) => (taskToDo = e.target.id));
-  console.log("TASK:", taskToDo);
+
+  const categorySelectFilter = categories.filter(
+    (category) => category !== "All"
+  );
+
+  // function selectCategoryHandler(){
+  // const categoryFilter = filterList.map((task) => {
+  //   <option key={12345}>{task.category}</option>;
+  //   })};
+
+  const onChangeHandler = (e) => {
+    e.preventDefault();
+    setTasktoDO(e.target.value);
+  };
+
+  const categoryHandler = (e) => {
+    e.preventDefault();
+    setTaskCategory(e.target.value);
+  };
+
   return (
     <form className="new-task-form" onSubmit={handleSubmit}>
       <label>
@@ -25,11 +50,11 @@ function NewTaskForm({ onTaskFormSubmit, filterList }) {
       </label>
       <label>
         Category
-        <select  id="category" value={taskCategories}>
+        <select id="category" onChange={categoryHandler} value={taskCategories}>
           {/* render <option> elements for each category here */}
-          {filterList.map((task) => (
-            <option>{task.category}</option>
-          ))}
+          {categorySelectFilter.map((task) => {
+            return <option key={uuid()}>{task}</option>;
+          })}
         </select>
       </label>
       <input value="Add task" type="submit" />

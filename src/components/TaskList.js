@@ -9,7 +9,7 @@ function TaskList({tasks,onDeleteTask}) {
   return (
     <div className="tasks">
       {/* display a list of tasks using Task component */}
-      {tasks.map(task => (<Task  onDeleteTask={onDeleteTask} task={task} key={uuid()} /> ))}
+      {tasks.map((task) => (<Task  onDeleteTask={onDeleteTask} text={task.text} category={task.category} task={task} /> ))}
     </div>
   );
 }
